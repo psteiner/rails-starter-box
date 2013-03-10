@@ -67,21 +67,15 @@ class install-rvm {
   rvm::system_user { vagrant: ; }
 
   rvm_system_ruby {
-    'ruby-1.9.3-p194':
-      ensure => 'present',
-      default_use => false;
-    'ruby-1.8.7-p370':
+    'ruby-1.9.3-p392':
       ensure => 'present',
       default_use => false;
   }
 
   rvm_gem {
-    'ruby-1.9.3-p194/bundler': ensure => latest;
-    'ruby-1.9.3-p194/rails': ensure => latest;
-    'ruby-1.9.3-p194/rake': ensure => latest;
-    'ruby-1.8.7-p370/bundler': ensure => latest;
-    'ruby-1.8.7-p370/rails': ensure => latest;
-    'ruby-1.8.7-p370/rake': ensure => latest;
+    'ruby-1.9.3-p392/bundler': ensure => latest;
+    'ruby-1.9.3-p392/rails': ensure => latest;
+    'ruby-1.9.3-p392/rake': ensure => latest;
   }
 
 }
