@@ -16,7 +16,7 @@ Inspired by the book ["Deploying Rails"](http://pragprog.com/book/cbdepra/deploy
 
 Building the virtual machine is this easy:
 
-    host $ git clone https://github.com/amaia/rails-starter-box.git
+    host $ git clone https://github.com/[your-name]/rails-starter-box.git
     host $ git submodule init
     host $ git submodule update
     host $ cd rails-starter-box
@@ -37,9 +37,9 @@ Port 3000 in the host computer is forwarded to port 3000 in the virtual machine.
 
 * SQLite3, MySQL, and Postgres
 
-* RVM (with ruby 1.9.3 and 1.8.7 installed)
+* RVM (with ruby 1.9.3 installed)
 
-* Bundler, Rails and Rake gems for both rubies
+* Bundler, Rails and Rake gems for rubies
 
 
 ## Recommended Workflow
