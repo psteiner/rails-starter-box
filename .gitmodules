@@ -10,3 +10,6 @@
 [submodule "puppet/modules/nodejs"]
 	path = puppet/modules/nodejs
 	url = https://github.com/puppetlabs/puppetlabs-nodejs.git
+[submodule "puppet/modules/apt"]
+	path = puppet/modules/apt
+	url = http://github.com/puppetlabs/puppetlabs-apt.git

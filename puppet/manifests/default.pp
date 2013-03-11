@@ -69,7 +69,7 @@ class { 'install_postgres': }
 
 
 
-class install-rvm {
+class install_rvm {
   include rvm
   rvm::system_user { vagrant: ; }
 
@@ -87,7 +87,13 @@ class install-rvm {
 
 }
 
-class { 'install-rvm': }
+class { 'install_rvm': }
+
+class install_nodejs {
+  class { 'nodejs': }
+}
+
+class { 'install_nodejs': }
 
 class dotfiles {
   exec { "clone-dotfiles":
