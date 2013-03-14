@@ -104,7 +104,7 @@ class dotfiles {
 
   exec { "install-dotfiles":
     command => "/home/vagrant/dotfiles/makesymlinks.sh",
-    cwd     => "/home/vagrant/dotfiles",
+    #cwd     => "/home/vagrant/dotfiles",
     creates => "/home/vagrant/oldfiles",
   }
 
