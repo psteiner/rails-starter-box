@@ -1,13 +1,22 @@
-Vagrant::Config.run do |config|
-  config.vm.customize ["modifyvm", :id, "--name", "test-box", "--memory", "512"]
-  config.vm.box       = 'precise64'
-  config.vm.box_url   = 'http://files.vagrantup.com/precise64.box'
-  config.vm.host_name = 'test-box'
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
 
-  config.vm.forward_port 3000, 3000, :auto => true
-  config.vm.share_folder "site", "site", "../site"
+Vagrant.configure("2") do |config|
 
-  config.vm.provision :puppet,
-    :manifests_path => 'puppet/manifests',
-    :module_path    => 'puppet/modules'
+  config.vm.box = "precise64"
+
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+
+  config.vm.network :forwarded_port, guest: 3000, host: 3000
+
+  config.vm.synced_folder "../site", "/home/vagrant/site"
+
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "512"]
+  end
+
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    puppet.module_path = "puppet/modules"
+  end
 end

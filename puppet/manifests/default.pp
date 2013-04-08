@@ -15,22 +15,31 @@ class { 'apt_get_update':
   stage => preinstall
 }
 
-package { [ 'build-essential', 
-'zlib1g-dev', 
-'libssl-dev', 
-'libreadline-dev', 
-'git-core', 
-'libxml2', 
-'libxml2-dev', 
-'libxslt1-dev',
-'sqlite3',
-'libsqlite3-dev']:
-ensure => installed,
+class build_essentials {
+  package { [ 'build-essential', 
+  'zlib1g-dev', 
+  'libssl-dev', 
+  'libreadline-dev', 
+  'git-core', 
+  'libxml2', 
+  'libxml2-dev', 
+  'libxslt1-dev',
+  'sqlite3',
+  'libgdbm-dev',
+  'libncurses5-dev',
+  'libffi-dev',
+  'libsqlite3-dev']:
+    ensure => installed,
+  }
+}
+
+class { 'build_essentials': 
+  #stage => preinstall
 }
 
 # RMagick system dependencies
 package { ['libmagickwand4', 'libmagickwand-dev']:
-ensure => installed,
+  ensure => installed,
 }
 
 package { "vim-nox":
@@ -84,10 +93,11 @@ class install_rvm {
     'ruby-1.9.3-p392/rails': ensure => latest;
     'ruby-1.9.3-p392/rake': ensure => latest;
   }
-
 }
 
-class { 'install_rvm': }
+class { 'install_rvm':
+  require => Class['build_essentials']
+}
 
 class install_nodejs {
   class { 'nodejs': }
@@ -97,10 +107,13 @@ class { 'install_nodejs': }
 
 class dotfiles {
   exec { "clone-dotfiles":
-    command => "git clone http://github.com/psteiner/dotfiles.git",
+    command => "git clone http://github.com/psteiner/vm-dotfiles.git dotfiles",
     cwd     => "/home/vagrant",
     creates => "/home/vagrant/dotfiles",
   }
+
+  # todo: chown -R vagrant /home/vagrant/dotfiles
+  #       chgrp -R vagrant /home/vagrant/dotfiles
 
   exec { "install-dotfiles":
     command => "/home/vagrant/dotfiles/makesymlinks.sh",
