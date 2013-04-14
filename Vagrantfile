@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "../site", "/home/vagrant/site"
 
   config.vm.provider :virtualbox do |vb|
-    vb.customize ["modifyvm", :id, "--memory", "512"]
+    vb.customize ["modifyvm", :id, "--name", "rails-vm-v2", "--memory", "2048"]
   end
 
   config.vm.provision :puppet do |puppet|

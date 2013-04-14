@@ -62,7 +62,12 @@ class { 'install_mysql': }
 class install_postgres {
   class { 'postgresql': }
 
-  class { 'postgresql::server': }
+  class { 'postgresql::server':
+    config_hash           => {
+      'ipv4acls'          => ['local all md5'],
+      'postgres_password' => 'password',
+    },
+  }
 
   pg_user { 'vagrant':
     ensure    => present,
